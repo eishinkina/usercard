@@ -1,15 +1,16 @@
 <template>
-  <div>
-    <h1>hello</h1>
+  <div id="app">
+    <user-card />
   </div>
 </template>
 
 <script>
-  export default {
-    
+import UserCard from './components/UserCard'
+
+export default {
+  name: 'App',
+  components: {
+    UserCard
   }
+}
 </script>
-
-<style lang="scss" scoped>
-
-</style>
