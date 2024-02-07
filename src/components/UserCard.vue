@@ -26,6 +26,17 @@
           {{ i + 1 }}. {{ getFullName(user) }}
         </li>
       </ul>
+      <button type="button" @click="currentPage--">Пред.</button>
+      <button
+        type="button"
+        @click="currentPage = page"
+        v-for="page in pages"
+        :key="page"
+      >
+        {{ page }}
+      </button>
+      <button type="button" @click="currentPage++">След.</button>
+      <p>Cтраница {{ currentPage }} из {{ pages }}</p>
       <!-- input type text -->
     </div>
   </div>
@@ -41,9 +52,9 @@ export default {
       users: [
         {
           id: 1,
-          name: "Иванов Иван Иванович",
+          name: "Борис Борисович Борисов",
           age: 25,
-          email: "ivan@goggle.com",
+          email: "boris@goggle.com",
         },
         {
           id: 2,
@@ -64,6 +75,8 @@ export default {
           email: "alex@google.com",
         },
       ],
+      pages: 3,
+      currentPage: 1,
     };
   },
   computed: {
@@ -75,7 +88,15 @@ export default {
     getFullName(user) {
       return `${user.name} - ${user.age} лет, email: ${user.email}`;
     },
+    loadUsers() {
+      console.log(`Загружаю пользователей...${this.users} страница ${this.currentPage} из ${this.pages}...`)
+    }
   },
+  watch: {
+    currentPage(page) {
+      this.loadUsers(page)
+    }
+  }
 };
 </script>
 
