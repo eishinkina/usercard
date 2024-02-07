@@ -20,8 +20,12 @@
           </ul>
         </div>
       </div>
-      <p>Участников: 0</p>
-      <ul></ul>
+      <p>Участников: {{ users.length }}</p>
+      <ul>
+        <li v-for="(user, i) in users" :key="user.id">
+          {{ i + 1 }}. {{ getFullName(user) }}
+        </li>
+      </ul>
       <!-- input type text -->
     </div>
   </div>
@@ -34,11 +38,42 @@ export default {
       firstName: "Иван",
       secondName: "Иванович",
       lastName: "Иванов",
+      users: [
+        {
+          id: 1,
+          name: "Иванов Иван Иванович",
+          age: 25,
+          email: "ivan@goggle.com",
+        },
+        {
+          id: 2,
+          name: "Петров Петр Петрович",
+          age: 30,
+          email: "petr@google.com",
+        },
+        {
+          id: 3,
+          name: "Сидоров Сидор Сидорович",
+          age: 35,
+          email: "sidor@google.com",
+        },
+        {
+          id: 4,
+          name: "Александров Александр Александрович",
+          age: 40,
+          email: "alex@google.com",
+        },
+      ],
     };
   },
   computed: {
     fullName() {
       return `${this.firstName.toUpperCase()} ${this.secondName.toUpperCase()} ${this.lastName.toUpperCase()}`;
+    },
+  },
+  methods: {
+    getFullName(user) {
+      return `${user.name} - ${user.age} лет, email: ${user.email}`;
     },
   },
 };
